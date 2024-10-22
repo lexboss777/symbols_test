@@ -1,4 +1,6 @@
-﻿namespace SymbolsTest;
+﻿using System.Runtime.InteropServices;
+
+namespace SymbolsTest;
 
 [Register ("AppDelegate")]
 public class AppDelegate : UIApplicationDelegate {
@@ -6,6 +8,9 @@ public class AppDelegate : UIApplicationDelegate {
         get;
         set;
     }
+
+    [DllImport("__Internal")]
+    public static extern int my_native_test_method();
 
     public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
     {
@@ -24,6 +29,8 @@ public class AppDelegate : UIApplicationDelegate {
 
         // make the window visible
         Window.MakeKeyAndVisible ();
+
+        my_native_test_method();
 
         return true;
     }
